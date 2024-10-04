@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+io.github.aofeng.threadpool4j.autoconfigure.Threadpoo4jAutoConfigure

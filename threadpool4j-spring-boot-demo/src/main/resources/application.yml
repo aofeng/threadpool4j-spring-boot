@@ -1,0 +1,25 @@
+threadpool4j:
+  enable: true
+  pool:
+    -
+      name: default
+      corePoolSize: 5
+      maxPoolSize: 10
+      keepAliveTime: 15
+      workQueueSize: 100000
+    -
+      name: other
+      corePoolSize: 5
+      maxPoolSize: 10
+      keepAliveTime: 15
+      workQueueSize: 100000
+  threadpoolstate:
+    jobSwitch: true
+    interval: 60
+  threadstate:
+    jobSwitch: true
+    interval: 60
+  threadstack:
+    jobSwitch: true
+    interval: 60
+    

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.18</version>
+        <relativePath/>
+    </parent>
+    <groupId>io.github.aofeng</groupId>
+    <artifactId>threadpool4j-spring-boot</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <description>threadpool4j的spring boot starter</description>
+
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <jdk.version>1.8</jdk.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <threadpool4j.version>3.2.0</threadpool4j.version>
+        <common4j.version>0.3.5</common4j.version>
+    </properties>
+
+    <modules>
+        <module>threadpool4j-spring-boot-autoconfigure</module>
+        <module>threadpool4j-spring-boot-starter</module>
+        <module>threadpool4j-spring-boot-demo</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.github.aofeng</groupId>
+                <artifactId>threadpool4j-spring-boot-autoconfigure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.aofeng</groupId>
+                <artifactId>threadpool4j-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.aofeng</groupId>
+                <artifactId>threadpool4j</artifactId>
+                <version>${threadpool4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.aofeng</groupId>
+                <artifactId>common4j</artifactId>
+                <version>${common4j.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
