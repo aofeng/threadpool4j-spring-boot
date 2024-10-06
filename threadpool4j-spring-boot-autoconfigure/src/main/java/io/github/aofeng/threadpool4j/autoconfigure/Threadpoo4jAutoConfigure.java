@@ -7,7 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -19,34 +21,21 @@ import org.springframework.stereotype.Component;
  * @since 2020/6/16
  */
 @Slf4j
-@Component
-@EnableConfigurationProperties(value = {Threadpool4jProperties.class})
-public class Threadpoo4jAutoConfigure implements InitializingBean, DisposableBean {
+@EnableConfigurationProperties({Threadpool4jProperties.class})
+@ConditionalOnProperty(name = "threadpool4j.enable", havingValue = "true")
+@ConditionalOnMissingBean(name = "threadPool4j")
+@AutoConfiguration
+public class Threadpoo4jAutoConfigure {
 
     @Autowired
     private Threadpool4jProperties threadpool4jProperties;
 
-    private ThreadPoolManagerCustom tpm = new ThreadPoolManagerCustom();
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
+    @Bean(name = {"threadPool4j"}, initMethod = "init", destroyMethod = "destroy")
+    public ThreadPool threadPool4j() {
         ThreadPoolConfigCustom threadPoolConfig = new ThreadPoolConfigCustom();
         threadPoolConfig.setThreadpool4jProperties(threadpool4jProperties);
         threadPoolConfig.init();
-        ThreadPoolImplCustom threadPool = new ThreadPoolImplCustom(threadPoolConfig);
-        tpm.setThreadPool(threadPool);
-        tpm.init();
-    }
-
-    @Override
-    public void destroy() throws Exception {
-        tpm.destroy();
-    }
-
-    @ConditionalOnMissingBean(name = {"threadPool4j"})
-    @Bean(name = {"threadPool4j"})
-    public ThreadPool threadPool4j() {
-        return tpm.getThreadPool();
+        return new ThreadPoolImplCustom(threadPoolConfig);
     }
 
 }

@@ -1,4 +1,4 @@
-package io.github.aofeng.threadpool4j.demo.controller;
+package io.github.aofeng.demo.threadpool4j.controller;
 
 import cn.aofeng.threadpool4j.ThreadPool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +27,7 @@ public class HelloThreadPool4jController {
                          @RequestParam(value = "sleepTime", required = true) Long sleepTime) {
         try {
             threadPool.submit(() -> {
+                // 模拟业务逻辑耗时
                 try {
                     Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {

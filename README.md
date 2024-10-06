@@ -34,19 +34,19 @@ threadpool4j.pool[1].keepAliveTime=15
 threadpool4j.pool[1].workQueueSize=100000
 
 # 线程池状态收集汇总配置
-# switch: on-开，off-关
+# switch: true-开，false-关
 # interval: 单位(秒)
 threadpool4j.threadpoolstate.jobSwitch=true
 threadpool4j.threadpoolstate.interval=60
 
 # 线程状态收集汇总配置
-# switch: on-开，off-关
+# switch: true-开，false-关
 # interval: 单位(秒)
 threadpool4j.threadstate.jobSwitch=true
 threadpool4j.threadstate.interval=60
 
 # 线程堆栈收集配置
-# switch: on-开，off-关
+# switch: true-开，false-关
 # interval: 单位(秒)
 threadpool4j.threadstack.jobSwitch=true
 threadpool4j.threadstack.interval=60
@@ -85,17 +85,27 @@ threadpool4j:
 
 ```java
 @RestController
-public class ThreadPool4jSampleController {
+public class HelloThreadPool4jController {
 
     @Autowired
     private ThreadPool threadPool;
+
+    @RequestMapping("/")
+    public String index() {
+        return "hello threadpool4j";
+    }
 
     @RequestMapping("/submit")
     public String submit(@RequestParam(value = "poolName", required = true) String poolName,
                          @RequestParam(value = "sleepTime", required = true) Long sleepTime) {
         try {
             threadPool.submit(() -> {
-                // 省略业务逻辑
+                // 模拟业务逻辑耗时
+                try {
+                    Thread.sleep(sleepTime);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }, poolName);
         } catch (Exception e) {
             return String.format("submit task to [%s] failed. message:%s", poolName, e.getMessage());
@@ -103,7 +113,6 @@ public class ThreadPool4jSampleController {
 
         return String.format("submit task to [%s] success", poolName);
     }
-
 }
 ```
 
