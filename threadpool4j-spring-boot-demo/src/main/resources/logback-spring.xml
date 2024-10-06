@@ -51,10 +51,6 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="io.github.aofeng.threadpool4j" level="INFO" additivity="false">
-        <appender-ref ref="THREADPOOL4J"/>
-    </logger>
-
     <logger name="cn.aofeng.threadpool4j.job.ThreadPoolStateJob" level="INFO" additivity="false" >
         <appender-ref ref="THREADPOOLSTATE"/>
     </logger>
