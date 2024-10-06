@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.ApplicationPidFileWriter;
 
 /**
+ * 演示DEMO启动入口。
+ *
  * @author <a href="mailto:aofengblog@163.com">聂勇</a>
  * @since 2024/10/4
  */

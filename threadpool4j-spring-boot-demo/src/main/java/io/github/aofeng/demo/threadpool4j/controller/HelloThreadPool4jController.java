@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * 使用 threadpool4j 演示代码。
+ *
  * @author <a href="mailto:aofengblog@163.com">聂勇</a>
  * @since 2024/10/4
  */
