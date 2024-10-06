@@ -25,29 +25,29 @@ threadpool4j.pool[0].name=default
 threadpool4j.pool[0].corePoolSize=5
 threadpool4j.pool[0].maxPoolSize=10
 threadpool4j.pool[0].keepAliveTime=15
-threadpool4j.pool[0].workQueueSize=100000
+threadpool4j.pool[0].workQueueSize=10000
 
 threadpool4j.pool[1].name=other
 threadpool4j.pool[1].corePoolSize=5
 threadpool4j.pool[1].maxPoolSize=10
 threadpool4j.pool[1].keepAliveTime=15
-threadpool4j.pool[1].workQueueSize=100000
+threadpool4j.pool[1].workQueueSize=10000
 
 # 线程池状态收集汇总配置
 # switch: true-开，false-关
-# interval: 单位(秒)
+# interval: 输出日志的间隔时间（单位：秒)
 threadpool4j.threadpoolstate.jobSwitch=true
 threadpool4j.threadpoolstate.interval=60
 
 # 线程状态收集汇总配置
 # switch: true-开，false-关
-# interval: 单位(秒)
+# interval: 输出日志的间隔时间（单位：秒)
 threadpool4j.threadstate.jobSwitch=true
 threadpool4j.threadstate.interval=60
 
 # 线程堆栈收集配置
 # switch: true-开，false-关
-# interval: 单位(秒)
+# interval: 输出日志的间隔时间（单位：秒)
 threadpool4j.threadstack.jobSwitch=true
 threadpool4j.threadstack.interval=60
 ```
@@ -100,7 +100,7 @@ public class HelloThreadPool4jController {
                          @RequestParam(value = "sleepTime", required = true) Long sleepTime) {
         try {
             threadPool.submit(() -> {
-                // 模拟业务逻辑耗时
+                // 模拟执行业务逻辑耗时
                 try {
                     Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
